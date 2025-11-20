@@ -1,0 +1,210 @@
+.technology-card {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  border-left: 6px solid #e0e0e0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.technology-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.technology-card:hover::before {
+  transform: scaleX(1);
+}
+
+.technology-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+  padding: 0;
+}
+
+.card-main {
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card-main:hover {
+  background-color: #f8f9fa;
+}
+
+.card-title {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.card-description {
+  margin: 0 0 20px 0;
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.95em;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.status-icon {
+  font-size: 1.3em;
+}
+
+.status-text {
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+.status-hint {
+  font-size: 0.8em;
+  opacity: 0.7;
+  font-weight: normal;
+  margin-left: auto;
+}
+
+/* Стили для секции заметок */
+.notes-section {
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.notes-header {
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.notes-header:hover {
+  background-color: #f0f0f0;
+}
+
+.notes-title {
+  font-weight: 600;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notes-badge {
+  background: #667eea;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.notes-toggle {
+  color: #888;
+  font-size: 0.9em;
+}
+
+.notes-content {
+  padding: 0 20px 20px 20px;
+}
+
+.notes-textarea {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+  background: white;
+}
+
+.notes-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.notes-hint {
+  margin-top: 8px;
+  font-size: 0.8em;
+  color: #666;
+  text-align: center;
+}
+
+/* Стили для разных статусов */
+.technology-card.completed {
+  border-left-color: #4caf50;
+  background: linear-gradient(135deg, #f8fff8 0%, #e8f5e9 100%);
+}
+
+.technology-card.in-progress {
+  border-left-color: #ff9800;
+  background: linear-gradient(135deg, #fffaf0 0%, #fff3e0 100%);
+}
+
+.technology-card.not-started {
+  border-left-color: #f44336;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+}
+
+.technology-card.completed .status-text {
+  color: #4caf50;
+}
+
+.technology-card.in-progress .status-text {
+  color: #ff9800;
+}
+
+.technology-card.not-started .status-text {
+  color: #f44336;
+}
+
+/* Анимация при изменении статуса */
+.technology-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .card-main {
+    padding: 15px;
+  }
+  
+  .status-indicator {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .status-hint {
+    margin-left: 0;
+  }
+  
+  .notes-header,
+  .notes-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
