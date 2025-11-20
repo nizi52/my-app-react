@@ -7,14 +7,29 @@ import TechnologyFilter from './components/TechnologyFilter';
 
 function App() {
   // состояние для хранения массива технологий
-  const [technologies, setTechnologies] = useState([
-    { id: 1, title: 'React Components', description: 'Изучение базовых компонентов', status: 'not-started', notes: '' },
-    { id: 2, title: 'JSX Syntax', description: 'Освоение синтаксиса JSX', status: 'not-started', notes: '' },
-    { id: 3, title: 'State Management', description: 'Работа с состоянием компонентов', status: 'not-started', notes: '' },
-    { id: 4, title: 'Props', description: 'Передача данных между компонентами', status: 'not-started', notes: '' },
-    { id: 5, title: 'Hooks', description: 'Использование хуков React', status: 'not-started', notes: '' },
-    { id: 6, title: 'Forms', description: 'Работа с формами в React', status: 'not-started', notes: '' }
-  ]);
+  const [technologies, setTechnologies] = useState(() => {
+    // Пытаемся загрузить из localStorage сразу при инициализации
+    const savedData = localStorage.getItem('techTrackerData');
+    if (savedData) {
+      try {
+        console.log('🎯 ИНИЦИАЛИЗАЦИЯ ИЗ LOCALSTORAGE');
+        return JSON.parse(savedData);
+      } catch (error) {
+        console.error('❌ Ошибка при инициализации:', error);
+      }
+    }
+    
+    // Если в localStorage нет данных, используем начальные
+    console.log('🎯 ИНИЦИАЛИЗАЦИЯ НАЧАЛЬНЫМИ ДАННЫМИ');
+    return [
+      { id: 1, title: 'React Components', description: 'Изучение базовых компонентов', status: 'not-started', notes: '' },
+      { id: 2, title: 'JSX Syntax', description: 'Освоение синтаксиса JSX', status: 'not-started', notes: '' },
+      { id: 3, title: 'State Management', description: 'Работа с состоянием компонентов', status: 'not-started', notes: '' },
+      { id: 4, title: 'Props', description: 'Передача данных между компонентами', status: 'not-started', notes: '' },
+      { id: 5, title: 'Hooks', description: 'Использование хуков React', status: 'not-started', notes: '' },
+      { id: 6, title: 'Forms', description: 'Работа с формами в React', status: 'not-started', notes: '' }
+    ];
+  });
 
   // состояние для активного фильтра
   const [activeFilter, setActiveFilter] = useState('all');
@@ -30,15 +45,24 @@ function App() {
 
   // Загрузка из localStorage при первом рендере
   useEffect(() => {
+    console.log('🔍 ЗАГРУЗКА ПРИ СТАРТЕ');
     const savedData = localStorage.getItem('techTrackerData');
+    
     if (savedData) {
       try {
         const parsedData = JSON.parse(savedData);
+        console.log('📥 ДАННЫЕ ИЗ LOCALSTORAGE:', parsedData);
+        console.log('📝 Заметки в загруженных данных:');
+        parsedData.forEach(tech => {
+          console.log(`   ${tech.title}: "${tech.notes}" (${tech.notes.length} символов)`);
+        });
+        
         setTechnologies(parsedData);
-        console.log('📥 Данные загружены из localStorage');
       } catch (error) {
-        console.error('❌ Ошибка при загрузке данных из localStorage:', error);
+        console.error('❌ Ошибка при загрузке данных:', error);
       }
+    } else {
+      console.log('📭 В localStorage нет данных');
     }
   }, []);
 

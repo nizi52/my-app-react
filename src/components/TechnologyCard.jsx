@@ -72,7 +72,8 @@ function TechnologyCard({ id, title, description, status, notes, onStatusChange,
         <div className="notes-section">
           <div className="notes-header" onClick={toggleNotes}>
             <span className="notes-title">
-              📝 Заметки {notes && <span className="notes-badge">{notes.length} симв.</span>}
+                📝 Заметки 
+                {notes.length > 0 && <span className="notes-badge">{notes.length} симв.</span>}
             </span>
             <span className="notes-toggle">
               {isNotesExpanded ? '▲' : '▼'}
