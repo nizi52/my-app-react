@@ -12,7 +12,7 @@
 
 /* стили для заголовка приложения */
 .App-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #0a5c8c,#0c192a,#813e6d); 
   padding: 30px;
   color: white;
   text-align: center;
@@ -49,7 +49,7 @@
 
 .search-input {
   width: 100%;
-  padding: 15px 50px 15px 20px;
+  padding: 15px 0;
   border: 2px solid #e0e0e0;
   border-radius: 25px;
   font-size: 1em;
