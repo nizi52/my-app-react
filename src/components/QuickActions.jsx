@@ -7,7 +7,7 @@ function QuickActions({ onMarkAllCompleted, onResetAll, onRandomize, onClearData
       <div className="actions-buttons">
         <button 
           className="action-btn completed-btn"
-          onClick={onMarkAllCompleted}
+          onClick={onMarkAllCompleted}  // ✅ Функция используется здесь
           title="Отметить все технологии как изученные"
         >
           ✅ Отметить все как выполненные
