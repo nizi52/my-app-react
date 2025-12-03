@@ -1,13 +1,19 @@
 import './QuickActions.css';
 
-function QuickActions({ onMarkAllCompleted, onResetAll, onRandomize, onClearData }) {
+function QuickActions({ 
+  onMarkAllCompleted, 
+  onResetAll, 
+  onRandomize, 
+  onClearData,
+  onRefresh 
+}) {
   return (
     <div className="quick-actions">
       <h3>⚡ Быстрые действия</h3>
       <div className="actions-buttons">
         <button 
           className="action-btn completed-btn"
-          onClick={onMarkAllCompleted}  // ✅ Функция используется здесь
+          onClick={onMarkAllCompleted}
           title="Отметить все технологии как изученные"
         >
           ✅ Отметить все как выполненные
@@ -27,6 +33,14 @@ function QuickActions({ onMarkAllCompleted, onResetAll, onRandomize, onClearData
           title="Случайно выбрать следующую технологию для изучения"
         >
           🎲 Случайный выбор следующей технологии
+        </button>
+        
+        <button 
+          className="action-btn refresh-btn"
+          onClick={onRefresh}
+          title="Обновить данные"
+        >
+          🔄 Обновить данные
         </button>
         
         <button 
