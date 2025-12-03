@@ -10,13 +10,9 @@ import TechnologySearch from './components/TechnologySearch';
 import RoadmapImporter from './components/RoadmapImporter';
 import ResourceLoader from './components/ResourceLoader';
 import useTechnologiesApi from './hooks/useTechnologiesApi';
-
-// Компоненты ПЗ 25
 import DataImportExport from './components/DataImportExport';
 import FormWithDeadline from './components/FormWithDeadline';
 import BulkStatusEditor from './components/BulkStatusEditor';
-
-// Компоненты ПЗ 26
 import { AppThemeProvider } from './contexts/ThemeContext';
 import NotificationSystem from './components/NotificationSystem';
 import ResponsiveTest from './components/ResponsiveTest';
@@ -183,7 +179,6 @@ function AppContent() {
             <AddTechnology onAdd={addTechnology} />
           } />
 
-          {/* ========== МАРШРУТЫ ДЛЯ ПЗ 25 ========== */}
           <Route path="/deadlines" element={
             <div className="pz25-section">
               <h2>⏱ Управление сроками изучения</h2>
@@ -229,7 +224,6 @@ function AppContent() {
             </div>
           } />
 
-          {/* ========== МАРШРУТЫ ДЛЯ ПЗ 26 ========== */}
           <Route path="/notifications" element={
             <div className="pz26-section">
               <h2>🔔 Система уведомлений</h2>
@@ -249,7 +243,6 @@ function AppContent() {
   );
 }
 
-// Главный компонент, обёрнутый в ThemeProvider
 function App() {
   return (
     <AppThemeProvider>
