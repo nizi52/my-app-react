@@ -6,21 +6,17 @@ function useTechnologiesApi() {
   const [error, setError] = useState(null);
   const abortControllerRef = useRef(null);
 
-  // Загрузка технологий из API
   const fetchTechnologies = async () => {
-    // Отменяем предыдущий запрос, если он существует
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
 
-    // Создаем новый AbortController для текущего запроса
     abortControllerRef.current = new AbortController();
 
     try {
       setLoading(true);
       setError(null);
 
-      // Имитация API запроса с задержкой и возможностью отмены
       const response = await new Promise((resolve, reject) => {
         const timeoutId = setTimeout(() => {
           const savedData = localStorage.getItem('techTrackerData');
@@ -79,7 +75,6 @@ function useTechnologiesApi() {
           }
         }, 500);
 
-        // Обработка отмены запроса
         abortControllerRef.current.signal.addEventListener('abort', () => {
           clearTimeout(timeoutId);
           reject(new DOMException('Запрос отменен', 'AbortError'));
@@ -90,7 +85,6 @@ function useTechnologiesApi() {
       setTechnologies(data);
 
     } catch (err) {
-      // Игнорируем ошибки отмены запроса
       if (err.name !== 'AbortError') {
         setError('Не удалось загрузить технологии');
         console.error('Ошибка загрузки:', err);
@@ -100,12 +94,10 @@ function useTechnologiesApi() {
     }
   };
 
-  // Добавление новой технологии
   const addTechnology = async (techData) => {
     const abortController = new AbortController();
     
     try {
-      // Имитация API запроса с возможностью отмены
       await new Promise((resolve, reject) => {
         const timeoutId = setTimeout(() => {
           const newTech = {
@@ -116,7 +108,6 @@ function useTechnologiesApi() {
 
           setTechnologies(prev => [...prev, newTech]);
           
-          // Обновляем localStorage
           const updatedTechnologies = [...technologies, newTech];
           localStorage.setItem('techTrackerData', JSON.stringify(updatedTechnologies));
           
@@ -139,7 +130,6 @@ function useTechnologiesApi() {
     }
   };
 
-  // Обновление технологии
   const updateTechnology = async (id, updatedData) => {
     const abortController = new AbortController();
     
@@ -172,7 +162,6 @@ function useTechnologiesApi() {
     }
   };
 
-  // Удаление технологии
   const deleteTechnology = async (id) => {
     const abortController = new AbortController();
     
@@ -201,11 +190,9 @@ function useTechnologiesApi() {
     }
   };
 
-  // Загружаем технологии при монтировании
   useEffect(() => {
     fetchTechnologies();
 
-    // Очистка при размонтировании
     return () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();

@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import './Navigation.css';
+import ThemeToggle from './ThemeToggle';
+
 
 function Navigation() {
   const location = useLocation();
@@ -38,10 +40,8 @@ function Navigation() {
           </Link>
         </li>
         
-        {/* Разделитель (визуальный) */}
         <li className="nav-divider">|</li>
         
-        {/* Задания ПЗ 25 */}
         <li>
           <Link
             to="/deadlines"
@@ -69,7 +69,22 @@ function Navigation() {
             📁 Импорт/Экспорт
           </Link>
         </li>
+        <li>
+            <Link to="/notifications" 
+            className={location.pathname === '/notifications' ? 'active' : ''}>
+                🔔 Уведомления
+            </Link>
+        </li>
+        <li>
+            <Link to="/responsive-test" 
+            className={location.pathname === '/responsive-test' ? 'active' : ''}>
+                📱 Адаптивность
+            </Link>
+        </li>        
       </ul>
+      <li>
+        <ThemeToggle />
+      </li>
     </nav>
   );
 }

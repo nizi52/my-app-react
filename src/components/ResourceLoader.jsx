@@ -1,4 +1,3 @@
-// components/ResourceLoader.jsx
 import { useState } from 'react';
 import './ResourceLoader.css';
 
@@ -12,7 +11,6 @@ function ResourceLoader({ technologyId, onResourcesLoaded }) {
     setError(null);
 
     try {
-      // Имитация API запроса
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -36,7 +34,6 @@ function ResourceLoader({ technologyId, onResourcesLoaded }) {
       if (err.name === 'AbortError') {
         setError('Превышено время ожидания');
       } else {
-        // Для демонстрации используем мок данные
         const mockResources = [
           { 
             id: 1, 

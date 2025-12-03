@@ -1,4 +1,3 @@
-// src/components/BulkStatusEditor.jsx
 import { useState, useEffect } from 'react';
 import './BulkStatusEditor.css';
 
@@ -7,13 +6,11 @@ function BulkStatusEditor({ technologies, onUpdateStatus }) {
     const [newStatus, setNewStatus] = useState('planned');
     const [selectAll, setSelectAll] = useState(false);
 
-    // Сброс выбора при изменении списка технологий
     useEffect(() => {
         setSelectedIds([]);
         setSelectAll(false);
     }, [technologies]);
 
-    // Обработка выбора/снятия одной технологии
     const handleSelect = (id) => {
         setSelectedIds(prev =>
             prev.includes(id)
@@ -22,7 +19,6 @@ function BulkStatusEditor({ technologies, onUpdateStatus }) {
         );
     };
 
-    // Обработка "Выбрать все"
     const handleSelectAll = () => {
         if (selectAll) {
             setSelectedIds([]);
@@ -32,7 +28,6 @@ function BulkStatusEditor({ technologies, onUpdateStatus }) {
         setSelectAll(!selectAll);
     };
 
-    // Применение нового статуса к выбранным
     const handleApplyStatus = () => {
         if (selectedIds.length === 0) {
             alert('Выберите хотя бы одну технологию');
@@ -49,7 +44,6 @@ function BulkStatusEditor({ technologies, onUpdateStatus }) {
         <div className="bulk-editor" role="region" aria-labelledby="bulk-editor-title">
             <h2 id="bulk-editor-title">Массовое редактирование статусов</h2>
 
-            {/* Управляющие элементы */}
             <div className="bulk-controls">
                 <div className="status-selector">
                     <label htmlFor="status-select">Новый статус:</label>
@@ -93,7 +87,6 @@ function BulkStatusEditor({ technologies, onUpdateStatus }) {
                 </div>
             </div>
 
-            {/* Список технологий с чекбоксами */}
             <div className="technologies-checklist" role="list">
                 {technologies.length === 0 ? (
                     <p className="empty-list">Нет технологий для редактирования</p>
@@ -132,7 +125,6 @@ function BulkStatusEditor({ technologies, onUpdateStatus }) {
                 )}
             </div>
 
-            {/* Информация для скринридера */}
             <div 
                 role="status" 
                 aria-live="polite" 

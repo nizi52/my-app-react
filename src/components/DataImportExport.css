@@ -96,7 +96,6 @@
     display: none;
 }
 
-/* Drag & Drop зона */
 .drop-zone {
     border: 3px dashed #adb5bd;
     border-radius: 10px;
@@ -121,7 +120,6 @@
     margin-top: 10px;
 }
 
-/* Информация */
 .data-info {
     margin-top: 25px;
     padding: 15px;
@@ -135,7 +133,6 @@
     margin-top: 8px;
 }
 
-/* Пример структуры */
 .structure-example {
     margin-top: 25px;
     border: 1px solid #dee2e6;

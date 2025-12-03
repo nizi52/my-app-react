@@ -60,7 +60,6 @@
   font-weight: 600;
 }
 
-/* Стили для активных фильтров с цветами статусов */
 .filter-btn.active[data-filter="not-started"] {
   background: linear-gradient(135deg, #ff6b6b, #ff5252);
   border-color: #ff6b6b;
@@ -76,7 +75,6 @@
   border-color: #45b7d1;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .filter-buttons {
     grid-template-columns: 1fr;

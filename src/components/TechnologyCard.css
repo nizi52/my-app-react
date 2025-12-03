@@ -84,7 +84,6 @@
   color: #000000;
 }
 
-/* Стили для секции заметок */
 .notes-section {
   border-top: 1px solid #f0f0f0;
   background: #fafafa;
@@ -154,7 +153,6 @@
   text-align: center;
 }
 
-/* Стили для разных статусов */
 .technology-card.completed {
   border-left-color: #4caf50;
   background: linear-gradient(135deg, #f8fff8 0%, #e8f5e9 100%);
@@ -182,12 +180,10 @@
   color: #f44336;
 }
 
-/* Анимация при изменении статуса */
 .technology-card {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Адаптивность */
 @media (max-width: 480px) {
   .card-main {
     padding: 15px;

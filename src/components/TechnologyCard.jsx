@@ -16,7 +16,6 @@ function TechnologyCard({ id, title, description, status, notes, onStatusChange,
     setIsNotesExpanded(!isNotesExpanded);
   };
 
-  // Определяем иконку, текст и цвет статуса
   const getStatusInfo = () => {
     switch (status) {
       case 'completed':
@@ -68,7 +67,6 @@ function TechnologyCard({ id, title, description, status, notes, onStatusChange,
           </div>
         </div>
 
-        {/* Секция заметок */}
         <div className="notes-section">
           <div className="notes-header" onClick={toggleNotes}>
             <span className="notes-title">

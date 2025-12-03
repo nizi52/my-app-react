@@ -1,4 +1,3 @@
-// src/components/RoadmapImporter.jsx
 import { useState } from 'react';
 import './RoadmapImporter.css';
 
@@ -17,7 +16,6 @@ function RoadmapImporter({ onImport }) {
     setError(null);
 
     try {
-      // Создаем AbortController для возможности отмены
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
 
@@ -33,7 +31,6 @@ function RoadmapImporter({ onImport }) {
 
       const roadmapData = await response.json();
       
-      // Форматируем данные под нашу структуру
       const formattedTechnologies = roadmapData.map((item, index) => ({
         id: Date.now() + index,
         title: item.title || item.name || `Технология ${index + 1}`,
@@ -64,14 +61,12 @@ function RoadmapImporter({ onImport }) {
     setError(null);
 
     try {
-      // Используем JSONPlaceholder как пример API
       const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
       
       if (!response.ok) throw new Error('Ошибка API');
       
       const posts = await response.json();
       
-      // Преобразуем посты в формат технологий
       const exampleTechnologies = posts.map((post, index) => ({
         id: Date.now() + index,
         title: `Технология: ${post.title.split(' ').slice(0, 3).join(' ')}`,
@@ -89,7 +84,6 @@ function RoadmapImporter({ onImport }) {
     } catch (err) {
       setError(`Ошибка: ${err.message}`);
       
-      // Fallback - мок данные если API недоступен
       const mockTechnologies = [
         {
           id: Date.now(),

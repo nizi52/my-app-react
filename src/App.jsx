@@ -10,11 +10,18 @@ import TechnologySearch from './components/TechnologySearch';
 import RoadmapImporter from './components/RoadmapImporter';
 import ResourceLoader from './components/ResourceLoader';
 import useTechnologiesApi from './hooks/useTechnologiesApi';
+
+// Компоненты ПЗ 25
 import DataImportExport from './components/DataImportExport';
 import FormWithDeadline from './components/FormWithDeadline';
 import BulkStatusEditor from './components/BulkStatusEditor';
 
-function App() {
+// Компоненты ПЗ 26
+import { AppThemeProvider } from './contexts/ThemeContext';
+import NotificationSystem from './components/NotificationSystem';
+import ResponsiveTest from './components/ResponsiveTest';
+
+function AppContent() {
   const { 
     technologies, 
     loading, 
@@ -25,13 +32,9 @@ function App() {
     deleteTechnology
   } = useTechnologiesApi();
 
-  // Состояние для поиска
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Состояние для выбранной технологии (для формы сроков)
   const [selectedTech, setSelectedTech] = useState(null);
 
-  // Обновление статуса (циклически)
   const updateTechnologyStatus = (id) => {
     const tech = technologies.find(t => t.id === id);
     if (tech) {
@@ -82,13 +85,10 @@ function App() {
     });
   };
 
-  // ========== ОБРАБОТЧИКИ ДЛЯ ПЗ 25 ==========
-  // 1. Сохранение сроков из FormWithDeadline
   const handleSaveDeadline = (deadlineData) => {
     if (selectedTech) {
       updateTechnology(selectedTech.id, deadlineData);
     } else {
-      // Если нет выбранной, создаём новую технологию
       addTechnology({
         ...deadlineData,
         status: 'not-started',
@@ -98,14 +98,12 @@ function App() {
     setSelectedTech(null);
   };
 
-  // 2. Массовое обновление статусов из BulkStatusEditor
   const handleBulkStatusUpdate = (ids, newStatus) => {
     ids.forEach(id => {
       updateTechnology(id, { status: newStatus });
     });
   };
 
-  // Отфильтрованные технологии для поиска
   const filteredTechnologies = technologies.filter(tech => {
     const searchMatch = searchQuery === '' || 
       tech.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -226,13 +224,37 @@ function App() {
               <h2>📁 Импорт и экспорт данных</h2>
               <DataImportExport
                 technologies={technologies}
-                setTechnologies={() => {}} // Передаём пустую функцию, если не используется
+                setTechnologies={() => {}}
               />
+            </div>
+          } />
+
+          {/* ========== МАРШРУТЫ ДЛЯ ПЗ 26 ========== */}
+          <Route path="/notifications" element={
+            <div className="pz26-section">
+              <h2>🔔 Система уведомлений</h2>
+              <NotificationSystem />
+            </div>
+          } />
+
+          <Route path="/responsive-test" element={
+            <div className="pz26-section">
+              <h2>📱 Тестирование адаптивности</h2>
+              <ResponsiveTest />
             </div>
           } />
         </Routes>
       </div>
     </Router>
+  );
+}
+
+// Главный компонент, обёрнутый в ThemeProvider
+function App() {
+  return (
+    <AppThemeProvider>
+      <AppContent />
+    </AppThemeProvider>
   );
 }
 

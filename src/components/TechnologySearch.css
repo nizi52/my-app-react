@@ -113,7 +113,6 @@
   font-weight: 500;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .search-input {
     padding: 12px 15px;

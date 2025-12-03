@@ -42,8 +42,6 @@ function TechnologyDetail({ technologies, onStatusChange, onNotesChange, onDelet
   };
 
   const handleEdit = () => {
-    // В будущем можно сделать отдельную страницу редактирования
-    // Пока просто показываем alert
     alert('Редактирование пока не реализовано. Изменяйте статус и заметки через текущий интерфейс.');
   };
 

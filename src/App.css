@@ -1,6 +1,5 @@
-/* Базовые стили для приложения */
 .App {
-  max-width: 1200px;
+  max-width: 95%;
   border-radius: 12px;
   margin: 0 auto;
   padding: 20px;
@@ -11,7 +10,6 @@
   min-height: 100vh;
 }
 
-/* Стили для заголовка приложения */
 .App-header {
   background: linear-gradient(90deg, #0a5c8c, #0c192a, #813e6d);
   padding: 30px;
@@ -34,8 +32,8 @@
   font-size: 1.2em;
 }
 
-/* Стили для навигации */
 .main-navigation {
+  width: 100%;
   background: white;
   border-radius: 15px;
   padding: 20px;
@@ -90,7 +88,6 @@
   color: white;
 }
 
-/* Стили для страниц */
 .page {
   background: white;
   border-radius: 15px;
@@ -170,7 +167,6 @@
   background: #e0e0e0;
 }
 
-/* Поисковая секция */
 .search-section {
   background: white;
   border-radius: 15px;
@@ -235,7 +231,6 @@
   font-weight: 500;
 }
 
-/* Контейнер для технологий на главной */
 .technologies-container {
   background: white;
   border-radius: 15px;
@@ -275,7 +270,6 @@
   gap: 20px;
 }
 
-/* Технологии сетка для страницы списка */
 .technologies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -352,7 +346,6 @@
   text-decoration: underline;
 }
 
-/* Форма добавления */
 .add-form {
   max-width: 600px;
   margin: 0 auto;
@@ -394,7 +387,6 @@
   margin-top: 30px;
 }
 
-/* Детали технологии */
 .technology-detail {
   max-width: 800px;
   margin: 0 auto;
@@ -470,7 +462,6 @@
   text-align: right;
 }
 
-/* Состояние при пустом списке */
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -495,7 +486,6 @@
   opacity: 0.8;
 }
 
-/* Анимации */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -511,13 +501,11 @@
   animation: fadeIn 0.3s ease-out;
 }
 
-/* Общие стили для ссылок */
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .App {
     padding: 10px;
@@ -575,7 +563,6 @@ a {
   }
 }
 
-/* Стили для маленьких экранов */
 @media (max-width: 480px) {
   .App-header {
     padding: 20px;
@@ -606,7 +593,6 @@ a {
   }
 }
 
-/* Улучшения для тёмной темы (опционально) */
 @media (prefers-color-scheme: dark) {
   .App {
     background-color: #121212;
@@ -673,7 +659,6 @@ a {
   100% { transform: rotate(360deg); }
 }
 
-/* Стили для ошибок */
 .app-error {
   background: linear-gradient(135deg, #ff6b6b, #ff5252);
   color: white;
@@ -703,7 +688,6 @@ a {
   transform: translateY(-2px);
 }
 
-/* Обновленные стили для быстрых действий */
 .quick-actions .refresh-btn {
   background: linear-gradient(135deg, #45b7d1, #29b6f6);
   color: white;
@@ -783,7 +767,6 @@ a {
   transform: rotate(180deg);
 }
 
-/* Обновленные стили для заголовка технологий */
 .technologies-header-actions {
   display: flex;
   align-items: center;
@@ -812,7 +795,6 @@ a {
   background: linear-gradient(135deg, #764ba2, #667eea);
 }
 
-/* Стили для пустого состояния */
 .empty-state-actions {
   display: flex;
   gap: 15px;
@@ -884,7 +866,6 @@ a {
   margin-bottom: 25px;
 }
 
-/* Маленькая версия категории */
 .tech-category-small {
   background: #e0e7ff;
   color: #667eea;
@@ -894,7 +875,6 @@ a {
   font-weight: 500;
 }
 
-/* Информация о поиске */
 .search-info {
   background: #f8f9fa;
   padding: 15px;
@@ -907,7 +887,6 @@ a {
   color: #666;
 }
 
-/* Заголовок элемента технологии */
 .tech-item-header {
   display: flex;
   justify-content: space-between;
@@ -920,10 +899,9 @@ a {
 .tech-item-header h3 {
   margin: 0;
   flex: 1;
-  color: #333; /* ✅ Темный цвет */
+  color: #333;
 }
 
-/* Стили для заголовка детальной страницы */
 .page-header-actions {
   display: flex;
   justify-content: space-between;
@@ -937,7 +915,7 @@ a {
   margin: 0;
   flex: 1;
   min-width: 200px;
-  color: #333; /* ✅ Темный цвет */
+  color: #333; 
 }
 
 .detail-actions {
@@ -946,7 +924,6 @@ a {
   flex-wrap: wrap;
 }
 
-/* Кнопка опасного действия */
 .btn-danger {
   background: linear-gradient(135deg, #ff6b6b, #ff5252);
   color: white;
@@ -958,7 +935,6 @@ a {
   box-shadow: 0 4px 12px rgba(255, 82, 82, 0.3);
 }
 
-/* Мета-информация о технологии */
 .tech-meta {
   display: flex;
   gap: 15px;
@@ -983,7 +959,6 @@ a {
   color: #ff9800;
 }
 
-/* Адаптивность для новых стилей */
 @media (max-width: 768px) {
   .page-header-actions {
     flex-direction: column;

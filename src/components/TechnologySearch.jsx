@@ -7,25 +7,22 @@ function TechnologySearch({ onSearch, technologies }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchTimeoutRef = useRef(null);
 
-  // Обработчик изменения поискового запроса
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
 
-    // Очищаем предыдущий таймер
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
     }
 
-    // Устанавливаем новый таймер для debounce (300ms)
     searchTimeoutRef.current = setTimeout(() => {
       if (value.trim()) {
-        // Фильтруем технологии для подсказок
+
         const filtered = technologies.filter(tech =>
           tech.title.toLowerCase().includes(value.toLowerCase()) ||
           tech.description.toLowerCase().includes(value.toLowerCase()) ||
           tech.category?.toLowerCase().includes(value.toLowerCase())
-        ).slice(0, 5); // Показываем только 5 подсказок
+        ).slice(0, 5); 
         
         setSuggestions(filtered);
         setShowSuggestions(true);
@@ -34,19 +31,16 @@ function TechnologySearch({ onSearch, technologies }) {
         setShowSuggestions(false);
       }
 
-      // Вызываем функцию поиска в родительском компоненте
       onSearch(value);
     }, 300);
   };
 
-  // Обработчик выбора подсказки
   const handleSuggestionClick = (tech) => {
     setSearchTerm(tech.title);
     setShowSuggestions(false);
     onSearch(tech.title);
   };
 
-  // Очистка поиска
   const clearSearch = () => {
     setSearchTerm('');
     setSuggestions([]);
@@ -54,7 +48,6 @@ function TechnologySearch({ onSearch, technologies }) {
     onSearch('');
   };
 
-  // Очистка при размонтировании
   useEffect(() => {
     return () => {
       if (searchTimeoutRef.current) {

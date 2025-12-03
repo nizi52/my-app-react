@@ -58,7 +58,6 @@
   transform: translateY(0);
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .actions-buttons {
     grid-template-columns: 1fr;

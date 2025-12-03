@@ -1,4 +1,3 @@
-// src/components/DataImportExport.jsx
 import { useState } from 'react';
 import './DataImportExport.css';
 
@@ -6,7 +5,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
     const [status, setStatus] = useState('');
     const [isDragging, setIsDragging] = useState(false);
 
-    // ==================== ЭКСПОРТ ====================
     const exportToJSON = () => {
         if (technologies.length === 0) {
             setStatus('❌ Нет данных для экспорта');
@@ -15,7 +13,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
         }
 
         try {
-            // Форматированный JSON с отступами
             const dataStr = JSON.stringify(technologies, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
@@ -37,12 +34,10 @@ function DataImportExport({ technologies = [], setTechnologies }) {
         }
     };
 
-    // ==================== ИМПОРТ ====================
     const importFromJSON = (event) => {
         const file = event.target.files[0];
         if (!file) return;
 
-        // Проверка типа файла
         if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
             setStatus('❌ Файл должен быть в формате JSON');
             setTimeout(() => setStatus(''), 3000);
@@ -55,20 +50,15 @@ function DataImportExport({ technologies = [], setTechnologies }) {
             try {
                 const imported = JSON.parse(e.target.result);
 
-                // ---------- ЗАДАНИЕ 3: ПРОВЕРКА КОРРЕКТНОСТИ ----------
-                // 1. Проверка что это массив
                 if (!Array.isArray(imported)) {
                     throw new Error('Данные должны быть массивом объектов');
                 }
 
-                // 2. Проверка каждого элемента
                 const validatedTechnologies = imported.map((item, index) => {
-                    // Базовые проверки
                     if (!item || typeof item !== 'object') {
                         throw new Error(`Элемент ${index}: не является объектом`);
                     }
 
-                    // Обязательные поля
                     if (!item.title || typeof item.title !== 'string') {
                         throw new Error(`Элемент ${index}: поле "title" обязательно`);
                     }
@@ -77,7 +67,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
                         throw new Error(`Элемент ${index}: поле "category" обязательно`);
                     }
 
-                    // Нормализация данных
                     return {
                         id: item.id || `imported-${Date.now()}-${index}`,
                         title: item.title.trim(),
@@ -98,7 +87,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
                     };
                 });
 
-                // 3. Проверка на дубликаты (по id)
                 const uniqueIds = new Set();
                 validatedTechnologies.forEach(tech => {
                     if (uniqueIds.has(tech.id)) {
@@ -108,17 +96,14 @@ function DataImportExport({ technologies = [], setTechnologies }) {
                     uniqueIds.add(tech.id);
                 });
 
-                // 4. Применение данных
                 setTechnologies(validatedTechnologies);
                 
-                // 5. Сохранение в localStorage
                 localStorage.setItem('technologies', JSON.stringify(validatedTechnologies));
                 
                 setStatus(`✅ Импортировано ${validatedTechnologies.length} технологий`);
                 setTimeout(() => setStatus(''), 3000);
 
             } catch (error) {
-                // Детализированные ошибки
                 let errorMessage = '❌ Ошибка импорта';
                 if (error.name === 'SyntaxError') {
                     errorMessage = '❌ Неверный формат JSON файла';
@@ -140,10 +125,9 @@ function DataImportExport({ technologies = [], setTechnologies }) {
         };
 
         reader.readAsText(file);
-        event.target.value = ''; // Сброс для повторного выбора того же файла
+        event.target.value = ''; 
     };
 
-    // ==================== DRAG & DROP ====================
     const handleDragOver = (e) => {
         e.preventDefault();
         setIsDragging(true);
@@ -159,7 +143,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
 
         const file = e.dataTransfer.files[0];
         if (file && (file.type === 'application/json' || file.name.endsWith('.json'))) {
-            // Создаем искусственное событие для input
             const fakeEvent = {
                 target: {
                     files: [file]
@@ -172,7 +155,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
         }
     };
 
-    // ==================== LOCALSTORAGE ====================
     const saveToLocalStorage = () => {
         try {
             localStorage.setItem('technologies', JSON.stringify(technologies));
@@ -205,19 +187,16 @@ function DataImportExport({ technologies = [], setTechnologies }) {
         }
     };
 
-    // ==================== РЕНДЕР ====================
     return (
         <div className="data-import-export">
             <h2>Импорт и экспорт данных</h2>
             
-            {/* Статус */}
             {status && (
                 <div className={`status-message ${status.includes('✅') ? 'success' : 'error'}`}>
                     {status}
                 </div>
             )}
 
-            {/* Панель управления */}
             <div className="controls-panel">
                 <button 
                     onClick={exportToJSON} 
@@ -254,7 +233,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
                 </button>
             </div>
 
-            {/* Drag & Drop зона */}
             <div
                 className={`drop-zone ${isDragging ? 'dragging' : ''}`}
                 onDragOver={handleDragOver}
@@ -266,7 +244,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
                 <div className="drop-hint">или выберите файл выше</div>
             </div>
 
-            {/* Информация о данных */}
             <div className="data-info">
                 <p>
                     <strong>Текущее состояние:</strong> {technologies.length} технологий
@@ -276,7 +253,6 @@ function DataImportExport({ technologies = [], setTechnologies }) {
                 </p>
             </div>
 
-            {/* Пример структуры (скрытый для скринридеров) */}
             <details className="structure-example">
                 <summary>Пример структуры JSON</summary>
                 <pre>{`[

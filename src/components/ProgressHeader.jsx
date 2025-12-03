@@ -8,7 +8,6 @@ function ProgressHeader({ technologies }) {
   
   const progressPercentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-  // Находим самую популярную категорию
   const getMostPopularCategory = () => {
     const categories = {
       'completed': completed,

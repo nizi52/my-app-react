@@ -1,9 +1,7 @@
-// src/components/FormWithDeadline.jsx
 import { useState, useEffect } from 'react';
 import './FormWithDeadline.css';
 
 function FormWithDeadline({ technology, onSave, onCancel }) {
-    // Начальные значения с проверкой на undefined
     const [formData, setFormData] = useState({
         title: technology?.title || '',
         deadline: technology?.deadline || '',
@@ -14,18 +12,15 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
     const [errors, setErrors] = useState({});
     const [isValid, setIsValid] = useState(false);
 
-    // Валидация формы
     const validateForm = () => {
         const newErrors = {};
 
-        // Валидация названия
         if (!formData.title.trim()) {
             newErrors.title = 'Название обязательно';
         } else if (formData.title.trim().length < 2) {
             newErrors.title = 'Минимум 2 символа';
         }
 
-        // Валидация дедлайна (если указан)
         if (formData.deadline) {
             const deadlineDate = new Date(formData.deadline);
             const today = new Date();
@@ -36,7 +31,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
             }
         }
 
-        // Валидация часов
         if (formData.hoursNeeded < 0) {
             newErrors.hoursNeeded = 'Часы не могут быть отрицательными';
         } else if (formData.hoursNeeded > 1000) {
@@ -47,12 +41,10 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
         setIsValid(Object.keys(newErrors).length === 0);
     };
 
-    // Запуск валидации при изменении данных
     useEffect(() => {
         validateForm();
     }, [formData]);
 
-    // Обработчик изменения полей
     const handleChange = (e) => {
         const { name, value, type } = e.target;
         setFormData(prev => ({
@@ -61,7 +53,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
         }));
     };
 
-    // Обработчик отправки
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isValid && onSave) {
@@ -73,7 +64,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
         <form onSubmit={handleSubmit} className="deadline-form" noValidate>
             <h2>Установка сроков изучения</h2>
 
-            {/* Название технологии */}
             <div className="form-group">
                 <label htmlFor="title" className="required">
                     Название технологии *
@@ -95,7 +85,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
                 )}
             </div>
 
-            {/* Дедлайн */}
             <div className="form-group">
                 <label htmlFor="deadline">Дедлайн (необязательно)</label>
                 <input
@@ -114,7 +103,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
                 )}
             </div>
 
-            {/* Часы на изучение */}
             <div className="form-group">
                 <label htmlFor="hoursNeeded">Часов на изучение</label>
                 <input
@@ -136,7 +124,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
                 )}
             </div>
 
-            {/* Приоритет */}
             <div className="form-group">
                 <label htmlFor="priority">Приоритет изучения</label>
                 <select
@@ -155,7 +142,6 @@ function FormWithDeadline({ technology, onSave, onCancel }) {
                 </small>
             </div>
 
-            {/* Кнопки действий */}
             <div className="form-actions">
                 <button
                     type="submit"
