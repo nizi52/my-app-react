@@ -1,11 +1,10 @@
+// contexts/ThemeContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-// Экспортируем контекст отдельно
 export const ThemeContext = createContext();
 
-// Компонент-провайдер темы
 export const AppThemeProvider = ({ children }) => {
     const [mode, setMode] = useState(() => {
         const saved = localStorage.getItem('theme-mode');
@@ -14,6 +13,14 @@ export const AppThemeProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem('theme-mode', mode);
+        
+        // Удаляем старые классы
+        document.body.classList.remove('light-theme', 'dark-theme');
+        // Добавляем новый класс
+        document.body.classList.add(`${mode}-theme`);
+        
+        // Также можно добавить атрибут для специфичных селекторов
+        document.body.setAttribute('data-theme', mode);
     }, [mode]);
 
     const toggleTheme = () => {
@@ -29,12 +36,21 @@ export const AppThemeProvider = ({ children }) => {
             secondary: {
                 main: mode === 'light' ? '#dc004e' : '#f48fb1',
             },
+            background: {
+                default: mode === 'light' ? '#f5f5f5' : '#121212',
+                paper: mode === 'light' ? '#ffffff' : '#1e1e1e',
+            },
+            text: {
+                primary: mode === 'light' ? 'rgba(0, 0, 0, 0.87)' : '#ffffff',
+                secondary: mode === 'light' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.7)',
+            },
         },
         components: {
             MuiCard: {
                 styleOverrides: {
                     root: {
                         borderRadius: 12,
+                        transition: 'all 0.3s ease',
                     }
                 }
             },
@@ -43,9 +59,18 @@ export const AppThemeProvider = ({ children }) => {
                     root: {
                         borderRadius: 8,
                         textTransform: 'none',
+                        transition: 'all 0.3s ease',
                     }
                 }
-            }
+            },
+            MuiAppBar: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: mode === 'light' ? '#1976d2' : '#1e1e1e',
+                        transition: 'background-color 0.3s ease',
+                    }
+                }
+            },
         }
     });
 

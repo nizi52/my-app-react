@@ -8,10 +8,246 @@
     sans-serif;
   background-color: #f5f5f5;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Светлая тема (по умолчанию) */
+.light-theme .App {
+  background-color: #f5f5f5;
+}
+
+.light-theme .App-header,
+.light-theme .page,
+.light-theme .technologies-container,
+.light-theme .search-section,
+.light-theme .main-navigation,
+.light-theme .technology-item {
+  background-color: white;
+  color: #333;
+  border-color: #e0e0e0;
+}
+
+.light-theme .nav-brand h2 {
+  color: #333;
+}
+
+.light-theme .technology-item {
+  background: rgb(241, 241, 241);
+  border-left: 4px solid #ffffff;
+}
+
+.light-theme .technology-item h3 {
+  color: #333;
+}
+
+.light-theme .technology-item p {
+  color: #666;
+}
+
+.light-theme .page-header h1,
+.light-theme .technologies-header h2,
+.light-theme .form-group label {
+  color: #333;
+}
+
+.light-theme .nav-menu a {
+  color: #666;
+}
+
+.light-theme .nav-menu a:hover {
+  background-color: #f5f5f5;
+  color: #667eea;
+}
+
+/* Темная тема */
+.dark-theme .App {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-theme .App-header,
+.dark-theme .page,
+.dark-theme .technologies-container,
+.dark-theme .search-section,
+.dark-theme .main-navigation,
+.dark-theme .technology-item {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #333;
+}
+
+.dark-theme .technology-item {
+  background: #252525;
+  border-left: 4px solid #333;
+}
+
+.dark-theme .technology-item:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .technology-item h3 {
+  color: #ffffff;
+}
+
+.dark-theme .technology-item p {
+  color: #cccccc;
+}
+
+.dark-theme .page-header h1,
+.dark-theme .technologies-header h2,
+.dark-theme .form-group label {
+  color: #ffffff;
+}
+
+.dark-theme .nav-brand h2 {
+  color: #e0e0e0;
+}
+
+.dark-theme .nav-menu a {
+  color: #cccccc;
+}
+
+.dark-theme .nav-menu a:hover {
+  background-color: #333;
+  color: #90caf9;
+}
+
+.dark-theme .search-input {
+  background-color: #2d2d2d;
+  border-color: #404040;
+  color: #e0e0e0;
+}
+
+.dark-theme .search-input::placeholder {
+  color: #888;
+}
+
+.dark-theme .search-input:focus {
+  border-color: #90caf9;
+  box-shadow: 0 0 0 3px rgba(144, 202, 249, 0.1);
+}
+
+.dark-theme .btn-secondary {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border-color: #404040;
+}
+
+.dark-theme .btn-secondary:hover {
+  background-color: #404040;
+}
+
+.dark-theme .back-link {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
+.dark-theme .btn-link {
+  color: #90caf9;
+}
+
+.dark-theme .btn-link:hover {
+  color: #64b5f6;
+}
+
+/* Дополнительные стили для темной темы */
+.dark-theme .technology-meta {
+  color: #aaaaaa;
+}
+
+.dark-theme .search-stats {
+  color: #aaaaaa;
+}
+
+.dark-theme .empty-state {
+  color: #aaaaaa;
+}
+
+.dark-theme .empty-state h3 {
+  color: #ffffff;
+}
+
+.dark-theme .notes-hint {
+  color: #888;
+}
+
+.dark-theme .tech-category {
+  background: rgba(144, 202, 249, 0.2);
+  color: #90caf9;
+}
+
+.dark-theme .tech-difficulty {
+  background: rgba(255, 179, 0, 0.2);
+  color: #ffb300;
+}
+
+.dark-theme .tech-category-small {
+  background: rgba(144, 202, 249, 0.2);
+  color: #90caf9;
+}
+
+/* Стили для статусов в темной теме */
+.dark-theme .status-completed {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.dark-theme .status-in-progress {
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+}
+
+.dark-theme .status-not-started {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
+.dark-theme .form-group input,
+.dark-theme .form-group textarea,
+.dark-theme .notes-textarea {
+  background-color: #2d2d2d;
+  border-color: #404040;
+  color: #e0e0e0;
+}
+
+.dark-theme .form-group input:focus,
+.dark-theme .form-group textarea:focus,
+.dark-theme .notes-textarea:focus {
+  border-color: #90caf9;
+  box-shadow: 0 0 0 3px rgba(144, 202, 249, 0.1);
+}
+
+.dark-theme .status-btn {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  border-color: #404040;
+}
+
+.dark-theme .status-btn:hover {
+  background: #404040;
+  border-color: #90caf9;
+}
+
+.dark-theme .status-btn.active {
+  background: #90caf9;
+  color: #121212;
+  border-color: #90caf9;
+}
+
+.dark-theme .detail-section h3 {
+  color: #ffffff;
+}
+
+.dark-theme .detail-section p {
+  color: #cccccc;
+}
+
+.dark-theme .tech-item-header h3 {
+  color: #ffffff;
 }
 
 .App-header {
-  background: linear-gradient(90deg, #0a5c8c, #0c192a, #813e6d);
+  background: linear-gradient(90deg, #dad7c5, #7b9c92, #4e706b);
   padding: 30px;
   color: white;
   text-align: center;
@@ -94,6 +330,7 @@
   padding: 30px;
   margin: 20px 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .page-header {
@@ -173,6 +410,7 @@
   padding: 20px;
   margin: 20px 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .search-box {
@@ -229,6 +467,7 @@
   font-size: 0.9em;
   color: #666;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .technologies-container {
@@ -237,6 +476,7 @@
   padding: 25px;
   margin: 20px 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .technologies-header {
@@ -262,6 +502,7 @@
   font-size: 0.9em;
   color: #666;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .technologies-list {
@@ -295,6 +536,7 @@
   margin: 0 0 10px 0;
   color: #cfcfcf;
   font-size: 1.2em;
+  transition: color 0.3s ease;
 }
 
 .technology-item p {
@@ -302,6 +544,7 @@
   color: #d4d4d4;
   font-size: 0.95em;
   line-height: 1.5;
+  transition: color 0.3s ease;
 }
 
 .technology-meta {
@@ -309,6 +552,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
+  transition: color 0.3s ease;
 }
 
 .status {
@@ -316,6 +560,7 @@
   border-radius: 20px;
   font-size: 0.85em;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .status-completed {
@@ -360,6 +605,7 @@
   margin-bottom: 8px;
   font-weight: 600;
   color: #ffffff;
+  transition: color 0.3s ease;
 }
 
 .form-group input,
@@ -400,12 +646,14 @@
   margin: 0 0 15px 0;
   color: #333;
   font-size: 1.3em;
+  transition: color 0.3s ease;
 }
 
 .detail-section p {
   margin: 0;
   color: #666;
   line-height: 1.6;
+  transition: color 0.3s ease;
 }
 
 .status-buttons {
@@ -460,12 +708,14 @@
   font-size: 0.9em;
   color: #666;
   text-align: right;
+  transition: color 0.3s ease;
 }
 
 .empty-state {
   text-align: center;
   padding: 60px 20px;
   color: #666;
+  transition: color 0.3s ease;
 }
 
 .empty-icon {
@@ -478,6 +728,7 @@
   margin: 0 0 10px 0;
   font-size: 1.5em;
   color: #333;
+  transition: color 0.3s ease;
 }
 
 .empty-state p {
@@ -593,47 +844,7 @@ a {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .App {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-  
-  .App-header,
-  .page,
-  .technologies-container,
-  .search-section,
-  .main-navigation,
-  .technology-item {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-  }
-  
-  .search-input {
-    background-color: #2d2d2d;
-    border-color: #404040;
-    color: #e0e0e0;
-  }
-  
-  .search-input::placeholder {
-    color: #888;
-  }
-  
-  .btn-secondary {
-    background-color: #2d2d2d;
-    color: #e0e0e0;
-    border-color: #404040;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #404040;
-  }
-  
-  .back-link {
-    background-color: #2d2d2d;
-    color: #e0e0e0;
-  }
-}
+/* Удаляем медиа-запрос prefers-color-scheme, так как теперь управляем темами через классы */
 
 .app-loading {
   display: flex;
@@ -873,6 +1084,7 @@ a {
   border-radius: 15px;
   font-size: 0.8em;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .search-info {
@@ -880,11 +1092,13 @@ a {
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
 .search-info p {
   margin: 5px 0;
   color: #666;
+  transition: color 0.3s ease;
 }
 
 .tech-item-header {
@@ -900,6 +1114,7 @@ a {
   margin: 0;
   flex: 1;
   color: #333;
+  transition: color 0.3s ease;
 }
 
 .page-header-actions {
@@ -915,7 +1130,8 @@ a {
   margin: 0;
   flex: 1;
   min-width: 200px;
-  color: #333; 
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 .detail-actions {
@@ -947,6 +1163,7 @@ a {
   border-radius: 20px;
   font-size: 0.85em;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .tech-category {

@@ -10,7 +10,14 @@ function ThemeToggle() {
             <IconButton 
                 onClick={toggleTheme} 
                 color="inherit"
-                sx={{ ml: 1 }}
+                sx={{ 
+                    ml: 1,
+                    '&:hover': {
+                        backgroundColor: mode === 'light' 
+                            ? 'rgba(0, 0, 0, 0.08)' 
+                            : 'rgba(255, 255, 255, 0.08)'
+                    }
+                }}
             >
                 {mode === 'light' ? <Brightness4 /> : <Brightness7 />}
             </IconButton>
