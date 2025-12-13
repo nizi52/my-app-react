@@ -1,0 +1,29 @@
+/* BatchEdit.css */
+
+/* Базовые стили */
+.batch-edit-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Светлая тема (по умолчанию) */
+.light-theme .batch-edit-container {
+  background-color: #ffffff;
+  color: #333;
+}
+
+/* Темная тема */
+.dark-theme .batch-edit-container {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .batch-edit-container {
+    padding: 15px;
+  }
+}
+
+/* Material-UI компоненты уже учитывают тему через ThemeProvider */

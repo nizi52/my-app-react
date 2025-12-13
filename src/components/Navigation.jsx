@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import './Navigation.css';
 import ThemeToggle from './ThemeToggle';
 
-
 function Navigation() {
   const location = useLocation();
 
@@ -23,6 +22,7 @@ function Navigation() {
             Главная
           </Link>
         </li>
+        
         <li>
           <Link
             to="/technologies"
@@ -31,6 +31,7 @@ function Navigation() {
             Все технологии
           </Link>
         </li>
+        
         <li>
           <Link
             to="/add-technology"
@@ -51,15 +52,17 @@ function Navigation() {
             ⏱ Сроки
           </Link>
         </li>
+        
         <li>
           <Link
             to="/bulk-edit"
             className={location.pathname === '/bulk-edit' ? 'active' : ''}
             title="Массовое редактирование статусов"
           >
-            🔄 Массовое
+            🔀 Массовое
           </Link>
         </li>
+        
         <li>
           <Link
             to="/import-export"
@@ -69,22 +72,51 @@ function Navigation() {
             📁 Импорт/Экспорт
           </Link>
         </li>
+        
         <li>
-            <Link to="/notifications" 
-            className={location.pathname === '/notifications' ? 'active' : ''}>
-                🔔 Уведомления
-            </Link>
+          <Link 
+            to="/notifications" 
+            className={location.pathname === '/notifications' ? 'active' : ''}
+            title="Система уведомлений"
+          >
+            🔔 Уведомления
+          </Link>
         </li>
+        
         <li>
-            <Link to="/responsive-test" 
-            className={location.pathname === '/responsive-test' ? 'active' : ''}>
-                📱 Адаптивность
-            </Link>
-        </li>        
+          <Link 
+            to="/statistics" 
+            className={location.pathname === '/statistics' ? 'active' : ''}
+            title="Статистика прогресса"
+          >
+            📊 Статистика
+          </Link>
+        </li>
+        
+        <li>
+          <Link 
+            to="/responsive-test" 
+            className={location.pathname === '/responsive-test' ? 'active' : ''}
+            title="Тестирование адаптивности"
+          >
+            📱 Адаптивность
+          </Link>
+        </li>
+        
+        <li>
+          <Link 
+            to="/settings" 
+            className={location.pathname === '/settings' ? 'active' : ''}
+            title="Настройки приложения"
+          >
+            ⚙️ Настройки
+          </Link>
+        </li>
       </ul>
-      <li>
+      
+      <div className="nav-theme-toggle">
         <ThemeToggle />
-      </li>
+      </div>
     </nav>
   );
 }

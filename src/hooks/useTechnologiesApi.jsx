@@ -1,214 +1,108 @@
-import { useState, useEffect, useRef } from 'react';
+// src/hooks/useTechnologiesApi.jsx
+import { useState, useEffect, useCallback } from 'react';
 
 function useTechnologiesApi() {
   const [technologies, setTechnologies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const abortControllerRef = useRef(null);
 
-  const fetchTechnologies = async () => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    abortControllerRef.current = new AbortController();
-
+  // Загрузка из localStorage при старте
+  const loadFromStorage = useCallback(() => {
     try {
       setLoading(true);
       setError(null);
-
-      const response = await new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(() => {
-          const savedData = localStorage.getItem('techTrackerData');
-          
-          if (savedData) {
-            const parsedData = JSON.parse(savedData);
-            resolve({
-              ok: true,
-              json: async () => parsedData
-            });
-          } else {
-            const initialTechnologies = [
-              {
-                id: 1,
-                title: 'React Components',
-                description: 'Изучение базовых компонентов',
-                status: 'not-started',
-                notes: '',
-                category: 'frontend',
-                difficulty: 'beginner'
-              },
-              {
-                id: 2,
-                title: 'JSX Syntax',
-                description: 'Освоение синтаксиса JSX',
-                status: 'not-started',
-                notes: '',
-                category: 'frontend',
-                difficulty: 'beginner'
-              },
-              {
-                id: 3,
-                title: 'State Management',
-                description: 'Работа с состоянием компонентов',
-                status: 'not-started',
-                notes: '',
-                category: 'frontend',
-                difficulty: 'intermediate'
-              },
-              {
-                id: 4,
-                title: 'Props',
-                description: 'Передача данных между компонентами',
-                status: 'not-started',
-                notes: '',
-                category: 'frontend',
-                difficulty: 'beginner'
-              }
-            ];
-            
-            localStorage.setItem('techTrackerData', JSON.stringify(initialTechnologies));
-            resolve({
-              ok: true,
-              json: async () => initialTechnologies
-            });
-          }
-        }, 500);
-
-        abortControllerRef.current.signal.addEventListener('abort', () => {
-          clearTimeout(timeoutId);
-          reject(new DOMException('Запрос отменен', 'AbortError'));
-        });
-      });
-
-      const data = await response.json();
-      setTechnologies(data);
-
-    } catch (err) {
-      if (err.name !== 'AbortError') {
-        setError('Не удалось загрузить технологии');
-        console.error('Ошибка загрузки:', err);
+      const saved = localStorage.getItem('technologies');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setTechnologies(parsed);
+        } else {
+          throw new Error('Неверный формат данных');
+        }
       }
+    } catch (err) {
+      console.error('Ошибка загрузки из localStorage:', err);
+      setError('Не удалось загрузить данные');
     } finally {
       setLoading(false);
     }
-  };
-
-  const addTechnology = async (techData) => {
-    const abortController = new AbortController();
-    
-    try {
-      await new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(() => {
-          const newTech = {
-            id: Date.now(),
-            ...techData,
-            createdAt: new Date().toISOString()
-          };
-
-          setTechnologies(prev => [...prev, newTech]);
-          
-          const updatedTechnologies = [...technologies, newTech];
-          localStorage.setItem('techTrackerData', JSON.stringify(updatedTechnologies));
-          
-          resolve(newTech);
-        }, 300);
-
-        abortController.signal.addEventListener('abort', () => {
-          clearTimeout(timeoutId);
-          reject(new DOMException('Запрос отменен', 'AbortError'));
-        });
-      });
-
-    } catch (err) {
-      if (err.name !== 'AbortError') {
-        throw new Error('Не удалось добавить технологию');
-      }
-      throw err;
-    } finally {
-      abortController.abort();
-    }
-  };
-
-  const updateTechnology = async (id, updatedData) => {
-    const abortController = new AbortController();
-    
-    try {
-      await new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(() => {
-          const updated = technologies.map(tech =>
-            tech.id === id ? { ...tech, ...updatedData } : tech
-          );
-          
-          setTechnologies(updated);
-          localStorage.setItem('techTrackerData', JSON.stringify(updated));
-          
-          resolve(updated.find(tech => tech.id === id));
-        }, 200);
-
-        abortController.signal.addEventListener('abort', () => {
-          clearTimeout(timeoutId);
-          reject(new DOMException('Запрос отменен', 'AbortError'));
-        });
-      });
-
-    } catch (err) {
-      if (err.name !== 'AbortError') {
-        throw new Error('Не удалось обновить технологию');
-      }
-      throw err;
-    } finally {
-      abortController.abort();
-    }
-  };
-
-  const deleteTechnology = async (id) => {
-    const abortController = new AbortController();
-    
-    try {
-      await new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(() => {
-          const filtered = technologies.filter(tech => tech.id !== id);
-          setTechnologies(filtered);
-          localStorage.setItem('techTrackerData', JSON.stringify(filtered));
-          resolve();
-        }, 200);
-
-        abortController.signal.addEventListener('abort', () => {
-          clearTimeout(timeoutId);
-          reject(new DOMException('Запрос отменен', 'AbortError'));
-        });
-      });
-
-    } catch (err) {
-      if (err.name !== 'AbortError') {
-        throw new Error('Не удалось удалить технологию');
-      }
-      throw err;
-    } finally {
-      abortController.abort();
-    }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchTechnologies();
+    loadFromStorage();
+  }, [loadFromStorage]);
 
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
+  // Сохранение в localStorage при любом изменении
+  useEffect(() => {
+    if (!loading && technologies.length >= 0) {
+      try {
+        localStorage.setItem('technologies', JSON.stringify(technologies));
+      } catch (err) {
+        console.error('Ошибка сохранения в localStorage:', err);
+        setError('Не удалось сохранить данные');
       }
-    };
+    }
+  }, [technologies, loading]);
+
+  // Обновление технологии
+  const updateTechnology = useCallback((id, updates) => {
+    setTechnologies(prev =>
+      prev.map(tech =>
+        tech.id === id 
+          ? { ...tech, ...updates, updatedAt: new Date().toISOString() } 
+          : tech
+      )
+    );
   }, []);
+
+  // Добавление технологии
+  const addTechnology = useCallback((techData) => {
+    const newTech = {
+      id: Date.now(),
+      status: 'not-started',
+      notes: '',
+      category: 'uncategorized',
+      difficulty: 'intermediate',
+      priority: 'medium',
+      ...techData,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    setTechnologies(prev => [...prev, newTech]);
+    return newTech;
+  }, []);
+
+  // Удаление технологии
+  const removeTechnology = useCallback((id) => {
+    setTechnologies(prev => prev.filter(tech => tech.id !== id));
+  }, []);
+
+  // Массовое обновление технологий
+  const updateMultipleTechnologies = useCallback((ids, updates) => {
+    setTechnologies(prev =>
+      prev.map(tech =>
+        ids.includes(tech.id) 
+          ? { ...tech, ...updates, updatedAt: new Date().toISOString() } 
+          : tech
+      )
+    );
+  }, []);
+
+  // Перезагрузка данных
+  const refetch = useCallback(() => {
+    loadFromStorage();
+  }, [loadFromStorage]);
 
   return {
     technologies,
     loading,
     error,
-    refetch: fetchTechnologies,
     addTechnology,
     updateTechnology,
-    deleteTechnology,
-    setTechnologies
+    removeTechnology,
+    updateMultipleTechnologies,
+    setTechnologies,
+    refetch,
   };
 }
 
