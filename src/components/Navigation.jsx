@@ -28,7 +28,7 @@ function Navigation() {
             to="/technologies"
             className={location.pathname === '/technologies' || location.pathname.includes('/technology/') ? 'active' : ''}
           >
-            Все технологии
+            Технологии
           </Link>
         </li>
         
@@ -37,19 +37,17 @@ function Navigation() {
             to="/add-technology"
             className={location.pathname === '/add-technology' ? 'active' : ''}
           >
-            Добавить
+            Add
           </Link>
         </li>
-        
-        <li className="nav-divider">|</li>
-        
+                
         <li>
           <Link
             to="/deadlines"
             className={location.pathname === '/deadlines' ? 'active' : ''}
             title="Форма с валидацией сроков"
           >
-            ⏱ Сроки
+            ⏱Сроки
           </Link>
         </li>
         
@@ -59,7 +57,7 @@ function Navigation() {
             className={location.pathname === '/bulk-edit' ? 'active' : ''}
             title="Массовое редактирование статусов"
           >
-            🔀 Массовое
+            🔀Масс
           </Link>
         </li>
         
@@ -69,7 +67,7 @@ function Navigation() {
             className={location.pathname === '/import-export' ? 'active' : ''}
             title="Импорт и экспорт данных"
           >
-            📁 Импорт/Экспорт
+            📁Имп/Эксп
           </Link>
         </li>
         
@@ -79,7 +77,7 @@ function Navigation() {
             className={location.pathname === '/notifications' ? 'active' : ''}
             title="Система уведомлений"
           >
-            🔔 Уведомления
+            🔔Уведы
           </Link>
         </li>
         
@@ -89,7 +87,7 @@ function Navigation() {
             className={location.pathname === '/statistics' ? 'active' : ''}
             title="Статистика прогресса"
           >
-            📊 Статистика
+            📊Статистика
           </Link>
         </li>
         
@@ -99,7 +97,7 @@ function Navigation() {
             className={location.pathname === '/responsive-test' ? 'active' : ''}
             title="Тестирование адаптивности"
           >
-            📱 Адаптивность
+            📱Адаптивность
           </Link>
         </li>
         
@@ -109,7 +107,7 @@ function Navigation() {
             className={location.pathname === '/settings' ? 'active' : ''}
             title="Настройки приложения"
           >
-            ⚙️ Настройки
+            ⚙️Setting
           </Link>
         </li>
       </ul>

@@ -60,15 +60,19 @@ function Home({
     <>
       <header className="App-header">
         <div className="header-content">
-          <div className="header-text">
-            <h1>Трекер изучения технологий</h1>
-            <p>Отслеживайте ваш прогресс в изучении технологий</p>
+          <div className="header-main">
+            <div className="header-icon">🚀</div>
+            <div className="header-text">
+              <h1>Трекер изучения технологий</h1>
+              <p>Отслеживайте ваш прогресс в изучении технологий</p>
+            </div>
           </div>
           <div className="header-actions">
             <button 
               onClick={onRefresh}
               className="header-refresh-btn"
               title="Обновить данные"
+              aria-label="Обновить данные"
             >
               🔄
             </button>

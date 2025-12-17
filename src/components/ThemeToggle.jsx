@@ -19,7 +19,8 @@ function ThemeToggle() {
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: '1.2em',
-        transition: 'all 0.3s ease'
+        transition: 'all 0.3s ease',
+        margin: '15px'
       }}
     >
       {mode === 'light' ? '🌙' : '☀️'}
